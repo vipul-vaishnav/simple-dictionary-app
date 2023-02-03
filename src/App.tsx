@@ -3,9 +3,11 @@ import { MantineProvider, MantineTheme, ColorSchemeProvider, ColorScheme, Contai
 import { Font } from './types/Font'
 import Entry from './components/Entry'
 import Header from './components/Header'
+import Input from './components/Input'
 
 const App = () => {
   const [font, setFont] = useState<Font>(Font.sansSerif)
+  const [value, setValue] = useState<string>('')
   const [colorScheme, setColorScheme] = useState<ColorScheme>('dark')
   const toggleColorScheme = () => {
     setColorScheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
@@ -45,6 +47,7 @@ const App = () => {
         <Entry>
           <Container>
             <Header font={font} setFont={setFont} colorScheme={colorScheme} toggleTheme={handleClick} />
+            <Input value={value} setValue={setValue} />
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus at commodi hic voluptatum non nemo
             molestias inventore impedit tenetur similique velit, ut explicabo nostrum cum deleniti pariatur rerum enim
             suscipit assumenda aliquam quidem ex accusantium est cupiditate. Minima, ullam? Asperiores deserunt qui

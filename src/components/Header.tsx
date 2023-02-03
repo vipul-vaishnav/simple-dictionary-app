@@ -1,4 +1,4 @@
-import { FC, ReactElement, useState } from 'react'
+import { FC, ReactElement } from 'react'
 import { Box, Divider, Group, Switch, Select, useMantineTheme } from '@mantine/core'
 import { IconBook, IconChevronDown, IconMoonStars, IconSun, IconTypography } from '@tabler/icons-react'
 import { IHeader } from './interfaces/IHeader'
@@ -20,6 +20,7 @@ const Header: FC<IHeader> = (props): ReactElement => {
       <Group>
         <Select
           value={font}
+          variant="unstyled"
           transition="pop-top-left"
           transitionDuration={80}
           transitionTimingFunction="ease"
@@ -27,7 +28,7 @@ const Header: FC<IHeader> = (props): ReactElement => {
           icon={<IconTypography size={14} color={theme.colors.grape[7]} />}
           rightSection={<IconChevronDown size={16} color={theme.colors.grape[7]} />}
           rightSectionWidth={32}
-          styles={{ rightSection: { pointerEvents: 'none' } }}
+          styles={{ rightSection: { pointerEvents: 'none' }, root: { width: 200 } }}
           data={[
             { label: 'Serif', value: Font.serif },
             { label: 'Sans-Serif', value: Font.sansSerif },
