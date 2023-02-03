@@ -4,4 +4,5 @@ export interface IInput {
   value: string
   setValue: Dispatch<SetStateAction<string>>
   handleSearch: () => void
+  loading: boolean
 }
