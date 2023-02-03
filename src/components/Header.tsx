@@ -9,6 +9,7 @@ const Header: FC<IHeader> = (props): ReactElement => {
   const theme = useMantineTheme()
   const handleChange = (font: Font) => {
     setFont(font)
+    localStorage.setItem('mantineFont', font)
   }
 
   return (

@@ -4,7 +4,7 @@ import { IInput } from './interfaces/IInput'
 import { IconSearch } from '@tabler/icons-react'
 
 const Input: FC<IInput> = (props): ReactElement => {
-  const { value, setValue } = props
+  const { value, setValue, handleSearch } = props
   const theme = useMantineTheme()
 
   return (
@@ -16,7 +16,7 @@ const Input: FC<IInput> = (props): ReactElement => {
         size="xl"
         variant="filled"
         rightSection={
-          <ActionIcon variant="transparent" size="xl" color={theme.colors.grape[9]} p={3}>
+          <ActionIcon onClick={handleSearch} variant="transparent" size="xl" color={theme.colors.grape[9]} p={3}>
             <IconSearch size={24} />
           </ActionIcon>
         }

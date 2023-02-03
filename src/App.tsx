@@ -17,6 +17,7 @@ const App = () => {
     toggleColorScheme()
     localStorage.setItem('mantineTheme', colorScheme === 'dark' ? 'light' : 'dark')
   }
+  const handleSearch = () => {}
 
   useEffect(() => {
     if (localStorage.getItem('mantineFont') && localStorage.getItem('mantineFont') === Font.monospace) {
@@ -47,22 +48,11 @@ const App = () => {
         <Entry>
           <Container>
             <Header font={font} setFont={setFont} colorScheme={colorScheme} toggleTheme={handleClick} />
-            <Input value={value} setValue={setValue} />
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus at commodi hic voluptatum non nemo
-            molestias inventore impedit tenetur similique velit, ut explicabo nostrum cum deleniti pariatur rerum enim
-            suscipit assumenda aliquam quidem ex accusantium est cupiditate. Minima, ullam? Asperiores deserunt qui
-            voluptate voluptas, illum ullam, natus rem eveniet sunt odit, corporis itaque perferendis est repellat
-            eaque. Error iure sit aliquam at rem vero libero dolore quis explicabo praesentium enim voluptatum eos velit
-            obcaecati molestias nostrum eius nesciunt, quam porro. Voluptatibus harum eum nisi sint maxime natus
-            eligendi, quam nemo sapiente. Architecto sit perferendis debitis dolor nihil omnis similique, non, ex a
-            quidem odio sed harum ea quos minus. Nemo nostrum sequi ipsum obcaecati, aperiam et ullam rem sapiente
-            dolorum vel saepe voluptates ratione rerum officiis. Laudantium repudiandae libero obcaecati quis expedita
-            quas vel quod quae necessitatibus accusantium, cupiditate eos iusto! Nam, temporibus. Accusamus pariatur
-            dolore laborum fugit. Porro sed dolor eaque, corporis, accusantium natus provident, rem amet corrupti
-            delectus exercitationem ducimus vitae nisi sit! Laboriosam quia molestiae corporis, fugit modi quibusdam vel
-            sint tenetur nisi aliquam officiis nesciunt impedit deserunt dolorum consequuntur numquam illo distinctio
-            harum aspernatur provident soluta nobis! Similique, cumque. Voluptas et ratione facere, exercitationem in
-            magni.
+            <Input value={value} setValue={setValue} handleSearch={handleSearch} />
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo placeat, sequi possimus consequuntur nobis
+            reprehenderit architecto neque sint quos. Quod magnam harum iure dignissimos architecto magni laborum
+            asperiores facere aperiam saepe vitae dolor quo expedita tenetur ratione velit dolores vel consectetur, nemo
+            tempore dolorum est ut! Quas est repudiandae magni!
           </Container>
         </Entry>
       </MantineProvider>
