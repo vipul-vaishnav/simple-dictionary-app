@@ -1,7 +1,7 @@
 import { FC, ReactElement, useState, useRef } from 'react'
 import { IWord } from './interfaces/IWord'
-import { ActionIcon, Box, Flex, Stack, Text, Title, useMantineTheme } from '@mantine/core'
-import { IconPlayerPlayFilled, IconPlayerPauseFilled } from '@tabler/icons-react'
+import { ActionIcon, Anchor, Box, Divider, Flex, List, Space, Stack, Text, Title, useMantineTheme } from '@mantine/core'
+import { IconPlayerPlayFilled, IconPlayerPauseFilled, IconExternalLink } from '@tabler/icons-react'
 
 const Word: FC<IWord> = (props): ReactElement => {
   const [play, setPlay] = useState<boolean>(false)
@@ -18,12 +18,13 @@ const Word: FC<IWord> = (props): ReactElement => {
       setPlay(true)
     }
   }
-
   ref.current?.addEventListener('ended', () => setPlay(false))
+
+  console.log(word)
 
   return (
     <Box>
-      <Flex justify={'space-between'} align={'center'}>
+      <Flex justify={'space-between'} align={'center'} mb={24}>
         <Stack>
           <Title order={1} size={48} ff={theme.fontFamily}>
             {word.word}
@@ -47,26 +48,81 @@ const Word: FC<IWord> = (props): ReactElement => {
           </ActionIcon>
         </Box>
       </Flex>
-      <p>==========================================================================</p>
-      <Stack>
+      <Stack mb={12}>
         {word.meanings?.map((item, key) => {
-          return <div key={key}>{item.partOfSpeech}</div>
+          return (
+            <Box key={key} my={12}>
+              <Divider
+                my="xs"
+                label={
+                  <>
+                    <Title order={2} fs={'italic'} ff={theme.fontFamily}>
+                      {item.partOfSpeech}
+                    </Title>
+                  </>
+                }
+              />
+              <Title order={4} ff={theme.fontFamily} fw={400} color="gray">
+                Meaning
+              </Title>
+              <Space h={18} />
+              <Box>
+                <List withPadding spacing={'md'}>
+                  {item.definitions?.map((def, key) => {
+                    return <List.Item key={key}>{def.definition}</List.Item>
+                  })}
+                </List>
+              </Box>
+              {item.synonyms && item.synonyms.length > 0 && (
+                <>
+                  <Space h={18} />
+                  <Box>
+                    <Title order={4} ff={theme.fontFamily} fw={400} color="gray">
+                      Synonyms
+                    </Title>
+                  </Box>
+                  <Space h={18} />
+                  <List withPadding>
+                    {item.synonyms.map((s, key) => {
+                      return <List.Item>{s}</List.Item>
+                    })}
+                  </List>
+                </>
+              )}
+              {item.antonyms && item.antonyms.length > 0 && (
+                <>
+                  <Space h={18} />
+                  <Box>
+                    <Title order={4} ff={theme.fontFamily} fw={400} color="gray">
+                      Antonyms
+                    </Title>
+                  </Box>
+                </>
+              )}
+            </Box>
+          )
         })}
       </Stack>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores expedita voluptatum quis ex dicta maiores
-      excepturi soluta ullam eveniet. Reiciendis in, est rerum blanditiis, dolor eum maxime ex ipsa fugiat dolores
-      beatae nam culpa incidunt, necessitatibus a nemo corporis asperiores natus cumque excepturi earum ratione amet
-      doloribus dolorum. Tempora necessitatibus voluptates consectetur sed consequuntur totam labore et quas facere?
-      Recusandae atque, excepturi debitis libero, voluptas fugit officia est, id enim perferendis porro possimus ducimus
-      quas. Incidunt adipisci repudiandae beatae numquam, mollitia eligendi porro ullam enim dicta explicabo recusandae
-      voluptatibus maiores aut obcaecati. Facere quae possimus ipsam? Esse, nam vitae. Quo eius dolor incidunt
-      consequuntur blanditiis labore corporis perferendis, assumenda, explicabo a eveniet nemo! Iure facilis repellendus
-      est maxime. Repudiandae saepe, commodi ut officiis non hic obcaecati fugiat facilis odit nobis assumenda ad
-      molestias autem enim veniam? Ducimus, voluptas nam necessitatibus voluptate delectus quibusdam deserunt cum magni
-      inventore iure animi modi reprehenderit repellat corporis fugit laboriosam magnam numquam ab ea totam asperiores
-      libero earum, similique harum. Possimus, quibusdam laborum! Iste ut non est obcaecati repudiandae labore officiis
-      optio iure. Atque facere dignissimos velit illum alias reiciendis explicabo eveniet fugit expedita aut nulla animi
-      natus sint nihil dolorum, minus saepe debitis repellat.
+      <Divider size="xs" />
+      <Box mt={12}>
+        <Text
+          fz={18}
+          color={theme.colorScheme === 'dark' ? theme.colors.gray[7] : theme.colors.gray[5]}
+          display={'flex'}
+        >
+          Source
+          <Anchor
+            fz={16}
+            fw={600}
+            color={theme.colorScheme === 'dark' ? theme.colors.grape[8] : 'dark'}
+            sx={{ marginLeft: 24, textDecoration: 'underline' }}
+            href={word.sourceUrls ? word.sourceUrls[0] : ''}
+          >
+            {word.sourceUrls ? word.sourceUrls[0] : ''}
+          </Anchor>
+          <IconExternalLink />
+        </Text>
+      </Box>
     </Box>
   )
 }
