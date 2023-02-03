@@ -8,6 +8,7 @@ import { IconCheck, IconX } from '@tabler/icons-react'
 import axios from 'axios'
 import { Word as State } from './types/Response'
 import Word from './components/Word'
+import Footer from './components/Footer'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
@@ -122,6 +123,7 @@ const App = () => {
               )}
               {state && <Word word={state} />}
             </Box>
+            <Footer />
           </Container>
         </NotificationsProvider>
       </MantineProvider>

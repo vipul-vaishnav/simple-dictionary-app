@@ -82,9 +82,9 @@ const Word: FC<IWord> = (props): ReactElement => {
                     </Title>
                   </Box>
                   <Space h={18} />
-                  <List withPadding>
+                  <List withPadding spacing={'md'}>
                     {item.synonyms.map((s, key) => {
-                      return <List.Item>{s}</List.Item>
+                      return <List.Item key={key}>{s}</List.Item>
                     })}
                   </List>
                 </>
@@ -97,6 +97,12 @@ const Word: FC<IWord> = (props): ReactElement => {
                       Antonyms
                     </Title>
                   </Box>
+                  <Space h={18} />
+                  <List withPadding spacing={'md'}>
+                    {item.antonyms.map((s, key) => {
+                      return <List.Item key={key}>{s}</List.Item>
+                    })}
+                  </List>
                 </>
               )}
             </Box>
@@ -117,6 +123,7 @@ const Word: FC<IWord> = (props): ReactElement => {
             color={theme.colorScheme === 'dark' ? theme.colors.grape[8] : 'dark'}
             sx={{ marginLeft: 24, textDecoration: 'underline' }}
             href={word.sourceUrls ? word.sourceUrls[0] : ''}
+            target={'_blank'}
           >
             {word.sourceUrls ? word.sourceUrls[0] : ''}
           </Anchor>
