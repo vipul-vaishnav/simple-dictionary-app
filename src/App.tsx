@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { MantineProvider, MantineTheme, ColorSchemeProvider, ColorScheme, Button, ActionIcon } from '@mantine/core'
+import { MantineProvider, MantineTheme, ColorSchemeProvider, ColorScheme, Container } from '@mantine/core'
 import { Font } from './types/Font'
 import Entry from './components/Entry'
-import CustomFonts from './components/CustomFonts'
-import { IconSun, IconMoonStars } from '@tabler/icons-react'
+import Header from './components/Header'
 
 const App = () => {
   const [font, setFont] = useState<Font>(Font.sansSerif)
@@ -11,11 +10,23 @@ const App = () => {
   const toggleColorScheme = () => {
     setColorScheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
   }
-  const theme: Partial<MantineTheme> = { fontFamily: font, colorScheme }
-
+  const theme: Partial<MantineTheme> = { fontFamily: font, colorScheme, primaryColor: 'grape' }
   const handleClick = () => {
     toggleColorScheme()
+    localStorage.setItem('mantineTheme', colorScheme === 'dark' ? 'light' : 'dark')
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('mantineFont') && localStorage.getItem('mantineFont') === Font.monospace) {
+      setFont(Font.monospace)
+    } else if (localStorage.getItem('mantineFont') && localStorage.getItem('mantineFont') === Font.serif) {
+      setFont(Font.serif)
+    } else if (localStorage.getItem('mantineFont') && localStorage.getItem('mantineFont') === Font.sansSerif) {
+      setFont(Font.sansSerif)
+    } else {
+      localStorage.setItem('mantineFont', Font.sansSerif)
+    }
+  }, [])
 
   useEffect(() => {
     if (
@@ -28,59 +39,28 @@ const App = () => {
     }
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem('mantineTheme', colorScheme)
-  }, [colorScheme])
-
   return (
-    <ColorSchemeProvider colorScheme={colorScheme || 'dark'} toggleColorScheme={toggleColorScheme}>
+    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
       <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
-        <CustomFonts />
         <Entry>
-          <Button
-            onClick={() => {
-              setFont(Font.serif)
-            }}
-          >
-            Change Font to serif
-          </Button>
-          <Button
-            onClick={() => {
-              setFont(Font.sansSerif)
-            }}
-          >
-            Change Font to sans-serif
-          </Button>
-          <Button
-            onClick={() => {
-              setFont(Font.monospace)
-            }}
-          >
-            Change Font to monospace
-          </Button>
-          <br />
-          <ActionIcon
-            variant="outline"
-            color={colorScheme === 'dark' ? 'yellow' : 'blue'}
-            onClick={handleClick}
-            title="Toggle color scheme"
-          >
-            {colorScheme === 'dark' ? <IconSun size={18} /> : <IconMoonStars size={18} />}
-          </ActionIcon>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit magni unde deleniti fugiat perspiciatis non
-          optio adipisci possimus nisi. Repellat nesciunt sapiente suscipit maxime a cumque exercitationem iusto labore
-          repellendus, ab consequuntur, consectetur error optio architecto corporis! Quasi molestias accusamus sapiente
-          ad inventore tempore provident odit non est doloribus, dolore earum error aspernatur ullam quaerat debitis
-          vero, laboriosam fuga soluta officiis suscipit ab. Ipsam, nemo. Corrupti, cumque delectus excepturi ut dolorem
-          eum at molestiae quidem minus quas aliquam distinctio? Voluptates recusandae quisquam rem maiores illo dolorum
-          amet, dolore itaque repellendus quidem id qui facere non assumenda sapiente provident, quo odit cumque ab
-          pariatur! Rem molestiae eveniet illo, dolor impedit magnam eum, minima deserunt quis quidem nobis illum
-          ducimus provident corrupti quo, accusantium ut eaque officiis sunt voluptatem laboriosam obcaecati. Fugit
-          facere, quidem dolorum at minima distinctio maxime quae voluptas non magni officiis enim delectus temporibus
-          corrupti possimus molestias, error reiciendis? Incidunt eius fuga asperiores, accusamus error vitae fugit odio
-          non tempore dolorum vero voluptatem, voluptatibus quae libero atque architecto assumenda nihil corrupti
-          voluptas eligendi hic officiis qui itaque. Architecto molestias mollitia neque laborum dolore tenetur ipsam
-          voluptates, maxime laudantium, error sunt nobis tempora earum facilis cumque? Odit vel eos ducimus!
+          <Container>
+            <Header font={font} setFont={setFont} colorScheme={colorScheme} toggleTheme={handleClick} />
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus at commodi hic voluptatum non nemo
+            molestias inventore impedit tenetur similique velit, ut explicabo nostrum cum deleniti pariatur rerum enim
+            suscipit assumenda aliquam quidem ex accusantium est cupiditate. Minima, ullam? Asperiores deserunt qui
+            voluptate voluptas, illum ullam, natus rem eveniet sunt odit, corporis itaque perferendis est repellat
+            eaque. Error iure sit aliquam at rem vero libero dolore quis explicabo praesentium enim voluptatum eos velit
+            obcaecati molestias nostrum eius nesciunt, quam porro. Voluptatibus harum eum nisi sint maxime natus
+            eligendi, quam nemo sapiente. Architecto sit perferendis debitis dolor nihil omnis similique, non, ex a
+            quidem odio sed harum ea quos minus. Nemo nostrum sequi ipsum obcaecati, aperiam et ullam rem sapiente
+            dolorum vel saepe voluptates ratione rerum officiis. Laudantium repudiandae libero obcaecati quis expedita
+            quas vel quod quae necessitatibus accusantium, cupiditate eos iusto! Nam, temporibus. Accusamus pariatur
+            dolore laborum fugit. Porro sed dolor eaque, corporis, accusantium natus provident, rem amet corrupti
+            delectus exercitationem ducimus vitae nisi sit! Laboriosam quia molestiae corporis, fugit modi quibusdam vel
+            sint tenetur nisi aliquam officiis nesciunt impedit deserunt dolorum consequuntur numquam illo distinctio
+            harum aspernatur provident soluta nobis! Similique, cumque. Voluptas et ratione facere, exercitationem in
+            magni.
+          </Container>
         </Entry>
       </MantineProvider>
     </ColorSchemeProvider>

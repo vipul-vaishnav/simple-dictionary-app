@@ -1,5 +1,5 @@
 export enum Font {
-    serif = "'Playfair Display', serif",
+    serif = "'Roboto Slab', serif",
     sansSerif = "'Poppins', sans-serif",
     monospace = "'Fira Code', monospace"
 }
