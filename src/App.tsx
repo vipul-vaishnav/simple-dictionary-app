@@ -120,7 +120,7 @@ const App = () => {
                   Search for a word
                 </Title>
               )}
-              {state && <Word />}
+              {state && <Word word={state} />}
             </Box>
           </Container>
         </NotificationsProvider>

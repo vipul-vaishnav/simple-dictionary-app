@@ -15,6 +15,7 @@ const Input: FC<IInput> = (props): ReactElement => {
         radius="lg"
         size="xl"
         variant="filled"
+        autoComplete="off"
         rightSection={
           <ActionIcon
             onClick={handleSearch}
